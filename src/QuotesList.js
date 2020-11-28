@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class QuotesList extends Component {
+class QuotesList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -9,7 +9,7 @@ class QuotesList extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount() {     //lifecycle method in react
      this.getQuote()
   }
 
@@ -20,18 +20,15 @@ class QuotesList extends Component {
       .then(data => {
         console.log(data);
         let quoteId = Math.floor(Math.random() * data.length)
-        console.log(data[quoteId])
         this.setState({
-          text: quoteId['text'],
-          author: quoteId['author'],
-
+          text: data[quoteId].text,
+          author: data[quoteId].author,
         })
       })
   }
 
   render(){
-    const { text, author } = this.getQuote
-    console.log({text})
+    const { text, author } = this.state
 
     return(
       <div>
