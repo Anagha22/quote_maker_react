@@ -1,24 +1,35 @@
+import React from 'react';
 import './App.css';
-import QuotesList from './QuotesList'
+import QuotesCollector from './QuotesCollector'
+import AddToList from './AddToList'
+
+class App extends React.Component{
+
+  constructor() {
+    super();
+    this.state = {
+      id: null,
+      quoteText: '',
+      author: '',
+      quoteArray: {},
+      quoteList: []
+    };
+
+  }
 
 
-
-function App() {
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <a>
-        <QuotesList />
-        <form>
-          <label>Quote:<input type="text" name="name" /></label>
-          <label>Author:<input type="text" name="name" /></label>
-          <input type="submit" value="Submit" />
-        </form>
-        </a>
-      </header>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <a>
+            <QuotesCollector />
+            <AddToList />
+          </a>
+        </header>
+      </div>
+    );
+  }
 }
 
 

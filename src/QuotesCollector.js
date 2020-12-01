@@ -1,6 +1,9 @@
 import React from 'react';
+import './QuoteForm.css';
 
-class QuotesList extends React.Component {
+
+class QuotesCollector extends React.Component {
+
   constructor(props) {
     super(props)
     this.state = {
@@ -10,11 +13,6 @@ class QuotesList extends React.Component {
   }
 
   componentDidMount() {     //lifecycle method in react
-     this.getQuote()
-  }
-
-  getQuote() {
-
     fetch('https://type.fit/api/quotes')
       .then(response => response.json())
       .then(data => {
@@ -27,18 +25,22 @@ class QuotesList extends React.Component {
       })
   }
 
+
+
   render(){
     const { text, author } = this.state
 
     return(
-      <div>
-      <h1>A quote to enlighten the day</h1>
-      <div id='text'><p>{text}</p></div>
-      <div id='text'><p>{author}</p></div>
 
+      <div className="row App-main">
+        <div id='text'><p>{text}</p></div>
+        <div id='text'><p>{author}</p></div>
+        <button class="btn"><i class="fa fa-plus"></i>Add</button>
+        <button class="btn"><i class="fa fa-close"></i>Close</button>
       </div>
+
     )
   }
 }
 
-export default QuotesList
+export default QuotesCollector
