@@ -1,22 +1,19 @@
-import React from 'react';
-import './App.css';
-import QuotesCollector from './QuotesCollector'
-import AddToList from './AddToList'
+import React from "react";
+import "./App.css";
+import QuotesCollector from "./QuotesCollector";
+import AddToList from "./AddToList";
 
-class App extends React.Component{
-
+class App extends React.Component {
   constructor() {
     super();
     this.state = {
       id: null,
-      quoteText: '',
-      author: '',
+      quoteText: "",
+      author: "",
       quoteArray: {},
-      quoteList: []
+      quoteList: [],
     };
-
   }
-
 
   render() {
     return (
@@ -31,6 +28,5 @@ class App extends React.Component{
     );
   }
 }
-
 
 export default App;
