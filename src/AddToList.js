@@ -13,7 +13,9 @@ class AddToList extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.addQuote = this.addQuote.bind(this);
-  }
+    this.handleSearch = this.handleSearch.bind(this);
+    this.searchIdeas = this.searchIdeas.bind(this);
+    }
 
 
   handleChange(event) {
@@ -25,12 +27,11 @@ class AddToList extends React.Component {
     this.setState({
       [name]:value
     })
-    console.log("exiting handlechange")
   }
 
 
 
-  addQuote(event){  console.log("addFoodItem")
+  addQuote(event){
     event.preventDefault()
     if (!this.state.quoteText) return ;
     const quoteArray = {
@@ -44,20 +45,30 @@ class AddToList extends React.Component {
       quoteText: '',
       author: '',
       quoteArray: quoteArray,
-      quoteList: [this.state.quoteList, quoteArray]
+      quoteList: [...this.state.quoteList, quoteArray]
     })
     console.log(this.state.quoteList);
   }
 
-  render() {
+  handleSearch(event){
+    this.searchIdeas(event.target.value)
+  }
 
-    const { quoteText, author, quoteList} = this.state;
+  searchIdeas(query){
+  let ideas = this.state.quoteList.filter((idea) => {
+    return (idea.quoteText.toLowerCase().includes(query)) || (idea.author.toLowerCase().includes(query))
+  });
+
+  this.setState({quoteText: this.state.quoteText})
+  this.setState({author: this.state.author})
+  console.log(ideas);
+  }
+
+
+  render() {
 
     return (
       <form>
-      <div className="App">
-      <div className="row App-main">
-
         <div className="form-group">
           <input type="text" className="form-control" name="quoteText" placeholder="Enter a quote" value={this.quoteText} onChange={ this.handleChange} required />
         </div>
@@ -65,12 +76,17 @@ class AddToList extends React.Component {
           <input type="text" className="form-control" name="author" placeholder="Author" value={this.author} onChange={ this.handleChange} />
         </div>
         <button className="button" onClick={this.addQuote}>Save</button>
+
+        <div>
+        <div className="row">
+        <div className="input-field">
+          <input type="text"placeholder="Search" onKeyUp={this.handleSearch.bind(this)}/>
         </div>
-        <div className="row App-main">
+      </div>
+
         <table>
           <thead>
             <tr>
-              <th>Id</th>
               <th>Quote</th>
               <th>Author</th>
             </tr>
@@ -78,9 +94,8 @@ class AddToList extends React.Component {
           <tbody>
               {
                 this.state.quoteList.length > 0 ? (
-                  this.state.quoteList.map((quoteArray) => (
+                  this.state.quoteList.reverse().map((quoteArray) => (
                       <tr key={quoteArray.id}>
-                        <td>{ quoteArray.id }</td>
                         <td>{ quoteArray.quoteText }</td>
                         <td>{ quoteArray.author }</td>
 
@@ -89,14 +104,16 @@ class AddToList extends React.Component {
                   )
                 ) : (
                   <tr>
-                    <td></td>
+                    <td colSpan={3}></td>
                   </tr>
                 )
               }
           </tbody>
         </table>
         </div>
-        </div>
+
+
+
 
 
       </form>

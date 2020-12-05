@@ -28,15 +28,14 @@ class QuotesCollector extends React.Component {
 
 
   render(){
-    const { text, author } = this.state
-
+   const { text, author } = this.state
+   
     return(
 
       <div className="row App-main">
         <div id='text'><p>{text}</p></div>
         <div id='text'><p>{author}</p></div>
-        <button class="btn"><i class="fa fa-plus"></i>Add</button>
-        <button class="btn"><i class="fa fa-close"></i>Close</button>
+        <button className="button" onClick={this.addQuote}>Add</button>
       </div>
 
     )
