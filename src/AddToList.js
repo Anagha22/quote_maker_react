@@ -34,7 +34,7 @@ class AddToList extends React.Component {
 
   addQuote(event) {
     event.preventDefault();
-    if (!this.state.quoteText) return;
+    if (!this.state.quoteText) return alert("Quote missing");
     const quoteArray = {
       id: this.state.quoteList.length + 1,
       quoteText: this.state.quoteText,
@@ -46,6 +46,8 @@ class AddToList extends React.Component {
       quoteArray: quoteArray,
       quoteList: [...this.state.quoteList, quoteArray],
     });
+    document.getElementById("quoteBox").value = "";
+    document.getElementById("authorBox").value = "";
   }
 
   addQuoteFromAPI(event) {
